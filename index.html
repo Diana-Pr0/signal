@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Гайд Дианы Приходько: анкета сигналов организма, дневник контроля состояния и чекап на год.">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Слышать свой организм</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Noto+Serif+Display:ital,wght@1,300;1,400&display=swap">
+<style>
+/* Layout: single reading column like a clinic handout; one teal "signal line" runs down the left of the steps */
+:root{
+  --bg:#F6F9F9; --surface:#FFFFFF; --soft:#EAF2F3; --line:#D3E0E1;
+  --ink:#22282B; --muted:#56666A; --accent:#1F5F63; --accent-ink:#FFFFFF; --accent-soft:#D4E7E8;
+  --warm:#B5651D; --warm-soft:#FBEBDD; --alert:#B23A33; --alert-soft:#F8E1DF;
+  --f-display:"Noto Serif Display",Georgia,"Times New Roman",serif;
+  --f-body:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D1719; --surface:#132225; --soft:#18292C; --line:#25393C;
+  --ink:#E7EFF0; --muted:#9FB2B5; --accent:#7CC9C4; --accent-ink:#0D1719; --accent-soft:#1D3A3C;
+  --warm:#E5A86A; --warm-soft:#33261A; --alert:#EF8A82; --alert-soft:#3A1E1C; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D1719; --surface:#132225; --soft:#18292C; --line:#25393C;
+  --ink:#E7EFF0; --muted:#9FB2B5; --accent:#7CC9C4; --accent-ink:#0D1719; --accent-soft:#1D3A3C;
+  --warm:#E5A86A; --warm-soft:#33261A; --alert:#EF8A82; --alert-soft:#3A1E1C; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;margin:0}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h1{font-family:var(--f-display);font-style:italic;font-weight:300;font-size:clamp(40px,8vw,64px);line-height:1.05;letter-spacing:-.01em}
+h1 em{color:var(--accent);font-style:italic}
+h2{font-family:var(--f-display);font-style:italic;font-weight:400;font-size:clamp(30px,5.5vw,40px);line-height:1.15}
+h3{font-size:17px;font-weight:600;line-height:1.35}
+p{margin:0}
+.label{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:18px;color:var(--muted);max-width:60ch}
+.muted{color:var(--muted)}
+.stack{display:flex;flex-direction:column;gap:16px}
+section{display:flex;flex-direction:column;gap:20px;padding-top:56px}
+
+/* hero */
+.hero{display:flex;flex-direction:column;gap:20px;padding-bottom:8px}
+.byline{font-size:14px;color:var(--muted)}
+.route{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.route a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid var(--line);border-radius:999px;color:var(--ink);text-decoration:none;font-size:14px;font-weight:500;background:var(--surface)}
+.route a span{color:var(--accent);font-weight:600}
+.route a:hover{border-color:var(--accent)}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+
+/* excuses */
+.excuses{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ex .sig{font-size:24px;line-height:1.2;font-weight:600;color:var(--warm);display:flex;align-items:center;gap:10px}
+.ex .sig::before{content:"";flex:none;width:10px;height:10px;border-radius:50%;background:var(--warm)}
+.ex q{font-family:var(--f-display);font-style:italic;font-size:22px;color:var(--muted);line-height:1.2;quotes:"«" "»"}
+.ex p{font-size:15px;color:var(--muted)}
+
+/* quiz */
+.step-head{display:flex;flex-direction:column;gap:8px}
+.groups{display:flex;flex-direction:column;gap:12px}
+fieldset{border:1px solid var(--line);border-radius:var(--r);background:var(--surface);padding:16px 18px 18px;margin:0;min-width:0}
+legend{padding:0 6px;margin-left:-6px;font-weight:600;font-size:17px;display:flex;align-items:center;gap:10px}
+.count{font-size:12px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--soft);color:var(--muted);font-variant-numeric:tabular-nums}
+.count.on{background:var(--warm-soft);color:var(--warm)}
+.count.hi{background:var(--alert-soft);color:var(--alert)}
+.opts{display:flex;flex-direction:column;gap:4px;margin-top:8px}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:9px 10px;border-radius:10px;cursor:pointer;font-size:15px;line-height:1.45}
+.opt:hover{background:var(--soft)}
+.opt input{appearance:none;flex:none;width:22px;height:22px;margin:0;border:1.5px solid var(--line);border-radius:6px;background:var(--surface);display:grid;place-content:center;cursor:pointer;transition:background .15s,border-color .15s}
+.opt input:checked{background:var(--accent);border-color:var(--accent)}
+.opt input:checked::after{content:"";width:10px;height:6px;border-left:2.5px solid var(--accent-ink);border-bottom:2.5px solid var(--accent-ink);transform:rotate(-45deg) translate(1px,-1px)}
+.opt input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.result{background:var(--soft);border-radius:var(--r);padding:22px;display:flex;flex-direction:column;gap:18px}
+.result .empty{color:var(--muted)}
+.rgroup{display:flex;flex-direction:column;gap:10px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.rgroup:last-of-type{border-bottom:0;padding-bottom:0}
+.rtitle{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.chip{font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.chip.watch{background:var(--warm-soft);color:var(--warm)}
+.chip.check{background:var(--alert-soft);color:var(--alert)}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:13px;font-weight:500;padding:5px 11px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.tag.lab{border-color:var(--accent);color:var(--accent)}
+.sub{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.btn{font:inherit;font-weight:600;font-size:15px;border:0;border-radius:999px;padding:13px 22px;background:var(--accent);color:var(--accent-ink);cursor:pointer;align-self:flex-start}
+.btn.ghost{background:transparent;color:var(--accent);border:1.5px solid var(--accent)}
+.btn:disabled{opacity:.45;cursor:default}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toast{font-size:14px;color:var(--accent);font-weight:500}
+
+.checkup{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.checkup>div{display:flex;flex-direction:column;gap:6px}
+.flags{border:1.5px solid var(--alert);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:10px;background:var(--surface)}
+.flags h3{color:var(--alert)}
+.flags p{font-size:15px}
+.flags ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:15px}
+
+/* diary */
+.diary{display:flex;flex-direction:column;gap:10px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:grid;grid-template-columns:72px 1fr;gap:10px 16px;align-items:center}
+.day .dname{font-weight:600;font-size:15px}
+.scales{display:flex;flex-wrap:wrap;gap:12px 24px}
+.scale{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted)}
+.dots{display:flex;gap:4px}
+.dots button{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--line);background:var(--surface);font:inherit;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;padding:0;font-variant-numeric:tabular-nums}
+.dots button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.day textarea{grid-column:2;font:inherit;font-size:14px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:8px 10px;resize:vertical;min-height:40px;width:100%}
+.summary{font-size:15px;color:var(--muted)}
+@media (max-width:520px){.day{grid-template-columns:1fr}.day textarea{grid-column:1}}
+
+/* rules */
+.rules{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--accent-soft);margin-left:6px}
+.rule{position:relative;padding:4px 0 22px 24px;display:flex;flex-direction:column;gap:4px}
+.rule::before{content:"";position:absolute;left:-7px;top:9px;width:12px;height:12px;border-radius:50%;background:var(--accent)}
+.rule p{color:var(--muted);font-size:15px}
+
+.cta{margin-top:56px;background:var(--accent);color:var(--accent-ink);border-radius:20px;padding:32px 28px;display:flex;flex-direction:column;gap:14px}
+.cta h2{color:var(--accent-ink)}
+.cta p{opacity:.9;max-width:52ch}
+.cta .btn{background:var(--accent-ink);color:var(--accent)}
+.note{font-size:13px;color:var(--muted);margin-top:28px;max-width:62ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="hero">
+    <span class="label">Гайд нутрициолога</span>
+    <h1>Как научиться <em>слышать</em> свой организм</h1>
+    <p class="lead">Организм каждый день подаёт нам сигналы, но мы привыкли их игнорировать. Этот гайд поможет заметить проблемы, понять, что за ними может стоять, и прийти к специалисту с конкретными вопросами.</p>
+    <p class="byline">Диана Приходько · практикующий нутрициолог</p>
+    <nav class="route" aria-label="Разделы гайда">
+      <a href="#excuses"><span>1</span> Отговорки</a>
+      <a href="#test"><span>2</span> Анкета сигналов</a>
+      <a href="#diary"><span>3</span> Дневник на 7 дней</a>
+      <a href="#rules"><span>4</span> 5 привычек</a>
+    </nav>
+  </header>
+
+  <section id="excuses">
+    <div class="step-head">
+      <span class="label">Шаг 1</span>
+      <h2>Как мы маскируем проблемы</h2>
+      <p class="muted">Узнаёте себя? Каждая отговорка убирает симптом, но не причину.</p>
+    </div>
+    <div class="excuses">
+      <article class="ex"><span class="sig">Выпадают волосы</span><q>Это сезонное</q><p>Сезонное выпадение действительно бывает: оно кратковременное, длится до пары месяцев и почти незаметно. Если волосы выпадают дольше 2–3 месяцев и вы явно видите их на расчёске, в душе или на подушке, это повод проверить ферритин, витамин D и щитовидную железу.</p></article>
+      <article class="ex"><span class="sig">Нет энергии</span><q>Выпью кофе</q><p>Кофе и энергетики маскируют усталость на пару часов, но ничего не восполняют. Наоборот, кофе мешает усвоению железа, а кофеин ускоряет выведение магния. А без железа, B12 и магния клетке не из чего делать энергию.</p></article>
+      <article class="ex"><span class="sig">Плохой сон</span><q>Поможет просекко</q><p>Некоторым алкоголь помогает быстрее уснуть, но делает сон поверхностным во второй половине ночи, и утром отдыха не чувствуется. По сути организм в это время не восстанавливается, а занят обезвреживанием алкоголя.</p></article>
+      <article class="ex"><span class="sig">Ломкие ногти</span><q>Укреплю гель-лаком</q><p>Гель-лак работает как броня: защищает ноготь снаружи, но не может построить его заново. Ноготь растёт изнутри, и для этого ему нужны белок, железо, цинк и биотин. Покрытие создаёт каркас, а прочность ногтя закладывается питанием.</p></article>
+    </div>
+  </section>
+
+  <section id="test">
+    <div class="step-head">
+      <span class="label">Шаг 2</span>
+      <h2>Анкета: какие сигналы подаёт твой организм</h2>
+      <p class="muted">Отметь всё, что замечаешь за последние 1–2 месяца.</p>
+    </div>
+    <form class="groups" id="quiz" autocomplete="off"></form>
+    <div class="result" id="result" aria-live="polite"></div>
+    <aside class="flags">
+      <h3>Когда не стоит ждать и нужно сразу обратиться к врачу</h3>
+      <p>Если замечаешь хотя бы один из этих признаков, не откладывай визит и не пытайся справиться добавками:</p>
+      <ul>
+        <li>Волосы выпадают прядями или появились участки без волос</li>
+        <li>Слабость вместе с одышкой, головокружением, бледностью</li>
+        <li>Вес уходит без видимой причины</li>
+        <li>Бессонница дольше 3 недель вместе с тревогой или подавленностью</li>
+        <li>Ногти изменились, и вокруг них боль, отёк или покраснение</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section id="diary">
+    <div class="step-head">
+      <span class="label">Шаг 3</span>
+      <h2>Дневник контроля состояния на 7 дней</h2>
+      <p class="muted">Каждый день оценивай сон и энергию от 1 до 5 и записывай, что сегодня беспокоило. Через неделю станет видно, что повторяется.</p>
+    </div>
+    <div class="diary" id="days"></div>
+    <p class="summary" id="dsum"></p>
+    <div class="row"><button class="btn ghost" type="button" id="clearDiary">Очистить дневник</button><span class="toast" id="dtoast"></span></div>
+  </section>
+
+  <section id="rules">
+    <div class="step-head">
+      <span class="label">Шаг 4</span>
+      <h2>5 привычек, которые помогут услышать сигналы вашего тела</h2>
+    </div>
+    <div class="rules">
+      <div class="rule"><h3>Пауза перед отговоркой</h3><p>Поймала себя на мысли «это ерунда», «это наследственное, у бабушки было точно так же»? Остановись на 10 секунд и назови сигнал словами: «я третий день просыпаюсь разбитой».</p></div>
+      <div class="rule"><h3>Записывать, а не запоминать</h3><p>Не рассчитывай на память. В моменте всё кажется острым, через время уже не таким важным, а потом и вовсе забывается. Дневник показывает закономерности: например, сон хуже после позднего ужина или энергия пропадает в определённые дни цикла.</p></div>
+      <div class="rule"><h3>Искать причину, а не маскировать симптомы</h3><p>Кофе, энергетики, бокал вина, гель-лак маскируют симптомы, но причина остаётся. Спроси себя честно: что организм пытается тебе сказать?</p></div>
+      <div class="rule"><h3>Не назначать себе добавки самостоятельно</h3><p>Железо, витамин A и селен в избытке могут навредить. Добавки работают, когда дефицит подтверждён анализами. Анализы — это ваша карта здоровья.</p></div>
+      <div class="rule"><h3>Раз в год делать чекап организма</h3><p>Базовые анализы помогают поймать дефицит до того, как он станет заметен.</p>
+        <div class="checkup">
+          <div><span class="sub">Кровь</span><div class="tags"><span class="tag lab">Общий анализ крови</span></div></div>
+          <div><span class="sub">Биохимия</span><div class="tags"><span class="tag lab">Общий белок</span><span class="tag lab">Холестерин</span><span class="tag lab">Сывороточное железо</span><span class="tag lab">Ферритин</span><span class="tag lab">АЛТ</span><span class="tag lab">АСТ</span><span class="tag lab">Креатинин</span><span class="tag lab">Мочевина</span><span class="tag lab">Глюкоза</span><span class="tag lab">Гликированный гемоглобин</span></div></div>
+          <div><span class="sub">Щитовидная железа</span><div class="tags"><span class="tag lab">ТТГ</span><span class="tag lab">Т3 свободный</span><span class="tag lab">Т4 свободный</span></div></div>
+          <div><span class="sub">Витамины</span><div class="tags"><span class="tag lab">B12</span><span class="tag lab">Витамин D (25-OH)</span></div></div>
+        </div></div>
+    </div>
+  </section>
+
+  <div class="cta">
+    <span class="label" style="color:inherit;opacity:.8">Разбор</span>
+    <h2>Хочешь разобрать свои сигналы со мной?</h2>
+    <p>Скопируй результат анкеты и пришли мне в директ. Подскажу, с чего начать и какие анализы сдать в первую очередь.</p>
+    <div class="row"><button class="btn" type="button" id="copy2">Скопировать результат</button><span class="toast" id="ctoast" style="color:inherit"></span></div>
+  </div>
+
+  <p class="note">Гайд носит информационный характер и не заменяет консультацию врача. Один и тот же сигнал может иметь разные причины, поэтому выводы делают по анализам и вместе со специалистом.</p>
+</div>
+
+<script>
+const GROUPS=[
+ {id:'hair',name:'Волосы',signals:['Волос на расчёске или в душе больше обычного','Волосы стали тоньше, хуже растут','Волосы сухие и ломаются','Это длится дольше 2 месяцев','Недавно была диета, резкое похудение или сильный стресс'],
+  nutrients:['Белок','Железо','Цинк','Витамин D','B12','Селен','Омега-3'],
+  labs:['Общий анализ крови','Ферритин','Витамин D (25-OH)','B12','Цинк','ТТГ','Общий белок'],
+  q:'С чем может быть связано выпадение волос',why:'Волос состоит из кератина, а волосяной фолликул — одна из самых активных тканей организма. Ему одному из первых «урезают» питание при нехватке белка, железа и витамина D.'},
+ {id:'energy',name:'Энергия',signals:['Устаю уже к обеду','Без кофе не могу проснуться','Одышка или сердцебиение при обычной нагрузке','Тяжело сосредоточиться','Днём сильно тянет на сладкое'],
+  nutrients:['Железо','B12','Магний','Йод','Коэнзим Q10','Витамины группы B'],
+  labs:['Общий анализ крови','Ферритин','B12','Фолиевая кислота','Витамин D (25-OH)','ТТГ','Глюкоза натощак'],
+  q:'С чем может быть связан дефицит энергии',why:'Энергию клетка делает из еды, и для этого ей нужны железо, витамины группы B, магний и коэнзим Q10. Йод нужен щитовидной железе, которая задаёт скорость обмена веществ.'},
+ {id:'sleep',name:'Сон',signals:['Долго засыпаю','Просыпаюсь ночью','Утром нет ощущения отдыха','Перед сном «крутит» ноги','Засыпаю только с бокалом или под сериал'],
+  nutrients:['Магний','Железо','Триптофан','Глицин','Витамин D','Омега-3'],
+  labs:['Ферритин','Витамин D (25-OH)','Магний','ТТГ'],
+  q:'С чем может быть связан плохой и некачественный сон',why:'Из триптофана образуются серотонин и мелатонин. Нехватка железа связана с беспокойными ногами по ночам, а низкий витамин D с более коротким и поверхностным сном.'},
+ {id:'nails',name:'Ногти и кожа',signals:['Ногти слоятся и ломаются','Ногти медленно растут','Вертикальные бороздки или белые пятна','Ногти вогнутые, как ложечка','Сухая кожа на руках и вокруг ногтей'],
+  nutrients:['Белок','Биотин','Железо','Цинк','B12','Омега-3'],
+  labs:['Общий анализ крови','Ферритин','Цинк','B12','ТТГ','Общий белок'],
+  q:'С чем могут быть связаны проблемы с ногтями и кожей рук',why:'Ноготь, как и волос, состоит из кератина. Вогнутая форма ногтя — классический признак нехватки железа, а ломкость бывает и при сбоях щитовидной железы.'},
+];
+const store={get(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const quiz=document.getElementById('quiz'),result=document.getElementById('result');
+let picked=store.get('signals')||{};
+GROUPS.forEach(g=>{
+  const fs=document.createElement('fieldset');
+  fs.innerHTML=`<legend>${g.name} <span class="count" id="c-${g.id}">0 из ${g.signals.length}</span></legend><div class="opts"></div>`;
+  const box=fs.querySelector('.opts');
+  g.signals.forEach((s,i)=>{const id=`q-${g.id}-${i}`;const l=document.createElement('label');l.className='opt';l.htmlFor=id;
+    l.innerHTML=`<input type="checkbox" id="${id}" data-g="${g.id}" data-i="${i}"${picked[id]?' checked':''}><span>${s}</span>`;box.appendChild(l)});
+  quiz.appendChild(fs);
+});
+quiz.addEventListener('change',e=>{if(e.target.matches('input')){picked[e.target.id]=e.target.checked;store.set('signals',picked);render()}});
+quiz.addEventListener('submit',e=>e.preventDefault());
+
+function counts(){return GROUPS.map(g=>({g,n:g.signals.filter((_,i)=>picked[`q-${g.id}-${i}`]).length}))}
+function render(){
+  const cs=counts();
+  cs.forEach(({g,n})=>{const el=document.getElementById('c-'+g.id);el.textContent=`${n} из ${g.signals.length}`;el.className='count'+(n>=2?' hi':n===1?' on':'')});
+  const act=cs.filter(c=>c.n>0);
+  if(!act.length){result.innerHTML=`<span class="label">Твой разбор</span><p class="empty">Отметь сигналы в анкете. Здесь появится, какие нутриенты могут быть с ними связаны и какие анализы обсудить со специалистом.</p>`;return}
+  let html=`<span class="label">Твой разбор</span>`;
+  act.sort((a,b)=>b.n-a.n).forEach(({g,n})=>{
+    const lvl=n>=2?'<span class="chip check">Стоит разобраться</span>':'<span class="chip watch">Понаблюдай</span>';
+    html+=`<div class="rgroup"><div class="rtitle"><h3>${g.name}</h3>${lvl}</div><p class="muted">${g.why}</p>
+      <span class="sub">${g.q}</span><div class="tags">${g.nutrients.map(x=>`<span class="tag">${x}</span>`).join('')}</div></div>`});
+  const labs=[...new Set(act.filter(c=>c.n>=2).flatMap(c=>c.g.labs))];
+  if(labs.length){html+=`<div class="stack" style="gap:10px"><span class="sub">Анализы, которые стоит обсудить со специалистом</span><div class="tags">${labs.map(x=>`<span class="tag lab">${x}</span>`).join('')}</div></div>`}
+  else html+=`<p class="muted">По одному сигналу выводы делать рано. Понаблюдай неделю с дневником ниже: если сигнал повторяется, он станет заметнее.</p>`;
+  html+=`<div class="row"><button class="btn" type="button" id="copy1">Скопировать результат</button><span class="toast" id="rtoast"></span></div>`;
+  result.innerHTML=html;
+  document.getElementById('copy1').onclick=()=>copy('rtoast');
+}
+function resultText(){
+  const cs=counts().filter(c=>c.n>0);
+  if(!cs.length)return '';
+  let t='Мои сигналы организма:\n';
+  cs.forEach(({g})=>{const s=g.signals.filter((_,i)=>picked[`q-${g.id}-${i}`]);t+=`\n${g.name}: ${s.join('; ')}`});
+  return t;
+}
+async function copy(toastId){
+  const tx=resultText(),el=document.getElementById(toastId);
+  if(!tx){el.textContent='Сначала отметь сигналы в анкете';return}
+  try{await navigator.clipboard.writeText(tx);el.textContent='Скопировано. Вставь в сообщение в директ'}
+  catch(e){const ta=document.createElement('textarea');ta.value=tx;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();
+    let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();el.textContent=ok?'Скопировано. Вставь в сообщение в директ':'Не получилось скопировать. Выдели текст анкеты вручную'}
+}
+document.getElementById('copy2').onclick=()=>copy('ctoast');
+render();
+
+// diary
+const DAYS=['День 1','День 2','День 3','День 4','День 5','День 6','День 7'];
+let diary=store.get('diary')||{};
+const daysEl=document.getElementById('days');
+function drawDiary(){
+  daysEl.innerHTML='';
+  DAYS.forEach((d,i)=>{const row=document.createElement('div');row.className='day';const v=diary[i]||{};
+    const dots=(key,label)=>`<div class="scale"><span>${label}</span><div class="dots" role="group" aria-label="${label}, ${d}">${[1,2,3,4,5].map(n=>`<button type="button" data-d="${i}" data-k="${key}" data-v="${n}" class="${v[key]===n?'on':''}" aria-pressed="${v[key]===n}">${n}</button>`).join('')}</div></div>`;
+    row.innerHTML=`<span class="dname">${d}</span><div class="scales">${dots('sleep','Сон')}${dots('energy','Энергия')}</div><textarea id="note-${i}" data-d="${i}" rows="1" placeholder="Что сегодня беспокоило? Например: выпала прядь при расчёсывании">${v.note||''}</textarea>`;
+    daysEl.appendChild(row)});
+  sumUp();
+}
+daysEl.addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const i=b.dataset.d,k=b.dataset.k,n=+b.dataset.v;
+  diary[i]=diary[i]||{};diary[i][k]=diary[i][k]===n?undefined:n;store.set('diary',diary);
+  b.parentElement.querySelectorAll('button').forEach(x=>{const on=diary[i][k]===+x.dataset.v;x.classList.toggle('on',on);x.setAttribute('aria-pressed',on)});sumUp()});
+daysEl.addEventListener('input',e=>{if(e.target.matches('textarea')){const i=e.target.dataset.d;diary[i]=diary[i]||{};diary[i].note=e.target.value;store.set('diary',diary);sumUp()}});
+function avg(k){const v=Object.values(diary).map(x=>x&&x[k]).filter(Boolean);return v.length?(v.reduce((a,b)=>a+b,0)/v.length):null}
+function sumUp(){const s=avg('sleep'),en=avg('energy');const filled=Object.values(diary).filter(x=>x&&(x.sleep||x.energy||x.note)).length;
+  const f=x=>x.toFixed(1).replace('.',',');
+  document.getElementById('dsum').textContent=filled?`Заполнено дней: ${filled} из 7.${s?` Средний сон: ${f(s)}.`:''}${en?` Средняя энергия: ${f(en)}.`:''}${(s&&s<3)||(en&&en<3)?' Ниже 3 из 5 — хороший повод взять дневник на консультацию.':''}`:'Начни сегодня слышать свой организм.'}
+let confirmClear=false;
+document.getElementById('clearDiary').onclick=e=>{const t=document.getElementById('dtoast');
+  if(!confirmClear){confirmClear=true;e.target.textContent='Точно очистить?';t.textContent='Нажми ещё раз, чтобы удалить записи';setTimeout(()=>{confirmClear=false;e.target.textContent='Очистить дневник';t.textContent=''},4000);return}
+  diary={};store.set('diary',diary);confirmClear=false;e.target.textContent='Очистить дневник';t.textContent='Дневник очищен';drawDiary()};
+drawDiary();
+</script>
+
+</body>
+</html>
